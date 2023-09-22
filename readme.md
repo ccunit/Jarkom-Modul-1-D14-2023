@@ -1,8 +1,84 @@
 # Laporan Praktikum Jaringan Komputer Modul 1 D14 2023
 
+
+
 Penulis:
 - Darren Prasetya (5025211162)
-- 
+- Mohammad Kamal (5025211180)
+
+  
+## Soal 1
+
+User melakukan berbagai aktivitas dengan menggunakan protokol FTP. Salah satunya adalah mengunggah suatu file.
+1. Berapakah sequence number (raw) pada packet yang menunjukkan aktivitas tersebut? 
+2. Berapakah acknowledge number (raw) pada packet yang menunjukkan aktivitas tersebut? 
+3. Berapakah sequence number (raw) pada packet yang menunjukkan response dari aktivitas tersebut?
+4. Berapakah acknowledge number (raw) pada packet yang menunjukkan response dari aktivitas tersebut?
+### Jawaban
+
+- Untuk menemukan aktivitas yang mengggunaka protokol FTP, gunakan filter : "ftp".
+- Kemudian cari manual packet yang berisi command "STOR"
+![alt text](images/img1.png)
+- Jawaban terdapat pada  TCP Header. Berikut merupakan jawaban no 1 dan 2
+![alt text](images/img2.png)
+- Jawaban 3 dan 4 terdapat pada packet selanjutnya, yaitu response.
+![alt text](images/img3.png)
+
+## Soal 2
+
+ Sebutkan web server yang digunakan pada portal praktikum Jaringan Komputer!
+
+### Jawaban 
+
+- Gunakan filter `ip.src == 10.21.78.111 and http` untuk filter packets yang berasal dari server protal praktikum jaringan komputer.
+- Kemudian liat HTTP header pada salah satu packet, tertulis server yang digunakan yaitu gunicorn.
+
+![alt text](images/img4.png)
+
+## Soal 3 
+
+ Dapin sedang belajar analisis jaringan. Bantulah Dapin untuk mengerjakan soal berikut:
+
+1. Berapa banyak paket yang tercapture dengan IP source maupun destination address adalah 239.255.255.250 dengan port 3702?
+2. Protokol layer transport apa yang digunakan?
+
+### Jawaban 
+- Gunakan filter  (ip.src == 239.255.255.250 || ip.dst == 239.255.255.250) && (tcp.port == 3702) untuk mencari tcp, ternyata hasilnya tidak ada. 
+- Lalu gunakan filter  = (ip.src == 239.255.255.250 || ip.dst == 239.255.255.250) && (udp.port == 3702)
+- Terdapat 60 packet yang tercapture :
+- Transport layer yang digunakan adalah UDP 
+- ![alt text](images/img5.png)
+
+## Soal 4
+Berapa nilai checksum yang didapat dari header pada paket nomor 130? 
+
+### Jawaban 
+- Langsung saja ke packet ke-130.
+- Di dalam packet 130, buka UDP header 
+- ![alt text](images/img6.png)
+Checksum adalah : 0x18e5
+
+## Soal 5
+
+Elshe menemukan suatu file packet capture yang menarik. Bantulah Elshe untuk menganalisis file packet capture tersebut.
+
+1. Berapa banyak packet yang berhasil di capture dari file pcap tersebut?
+2. Port berapakah pada server yang digunakan untuk service SMTP?
+3. Dari semua alamat IP yang tercapture, IP berapakah yang merupakan public I
+
+### Jawaban 
+- Gunakan filter STMP
+- Kemudian cari packet satu-persatu sampai ketemu data yang terdapat password dari zip tersebut.
+- ![alt text](images/img7.png)
+- Passwordnya adalah dalam bentuk base64, sehingga didekripsi dahulu. 
+- Passwordnya digunakan untuk membuka zip
+- Dalam zip terdapat command nc.
+- Jawaban dari pertanyaan-pertanyaan adalah : 60, 1470, public ip : 74.53.140.153
+![alt text](images/img8.png)
+
+
+
+
 ## Soal 6
 Seorang anak bernama Udin Berteman dengan SlameT yang merupakan seorang penggemar film detektif. sebagai teman yang baik, Ia selalu mengajak slamet untuk bermain valoranT bersama. suatu malam, terjadi sebuah hal yang tak terdUga. ketika udin mereka membuka game tersebut, laptop udin menunjukkan sebuah field text dan Sebuah kode Invalid bertuliskan "server SOURCE ADDRESS 7812 is invalid". ketika ditelusuri di google, hasil pencarian hanya menampilkan a1 e5 u21. jiwa detektif slamet pun bergejolak. bantulah udin dan slamet untuk menemukan solusi kode error tersebut.
 
