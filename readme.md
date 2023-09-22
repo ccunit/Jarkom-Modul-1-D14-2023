@@ -1,1 +1,1 @@
-lolol
+# Laporan Praktikum Jaringan Komputer Modul 1 D14 2023
